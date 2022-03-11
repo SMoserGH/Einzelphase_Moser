@@ -27,6 +27,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void TCPServerConnection(){
+        TCPServer server = new TCPServer(getMatrikelnummerEingabe());
+        Thread t = new Thread(server);
+        t.start();
+
+        try {
+            t.join();
+            this.tv_answer.setText(server.getBerechneteMatrikelnr());
+        }catch (Exception e){
+            this.tv_answer.setText("Fehler");
+            e.printStackTrace();
+        }
+    }
+
+    public String getMatrikelnummerEingabe(){
+        return tv_answer.getText().toString();
+    }
+
+
+
 
 
 

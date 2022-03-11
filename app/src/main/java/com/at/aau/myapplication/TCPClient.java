@@ -13,9 +13,5 @@ public class TCPClient {
         long number;
         long modifiedNumber;
 
-
-
-
-
     }
 }
