@@ -3,16 +3,17 @@ package com.at.aau.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView mn_text;
-    Button sendButton;
-    TextView tv_answer;
-    EditText editInput;
+    private TextView mn_text;
+    private Button sendButton;
+    private TextView tv_answer;
+    private EditText editInput;
 
 
     @Override
@@ -22,12 +23,19 @@ public class MainActivity extends AppCompatActivity {
 
         mn_text = findViewById(R.id.mn_text);
         sendButton = findViewById(R.id.sendbutton);
+        sendButton.setOnClickListener(this);
         tv_answer = findViewById(R.id.tv_answer);
         editInput = findViewById(R.id.editInput);
 
     }
 
-    public void TCPServerConnection(){
+    public void onClick(View view){
+        if(view.getId() == R.id.sendbutton){
+            TCPServerConnection();
+        }
+    }
+
+    private void TCPServerConnection(){
         TCPServer server = new TCPServer(getMatrikelnummerEingabe());
         Thread t = new Thread(server);
         t.start();
@@ -42,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getMatrikelnummerEingabe(){
-        return tv_answer.getText().toString();
+        return editInput.getText().toString();
     }
 
 
