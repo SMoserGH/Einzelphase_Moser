@@ -13,14 +13,7 @@ public class TCPClient {
         long number;
         long modifiedNumber;
 
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        Socket clientSocket = new Socket("se2-isys.aau.at",53212);
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        number = inFromUser.read();
-        modifiedNumber = inFromServer.read();
 
 
 

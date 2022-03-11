@@ -7,23 +7,32 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TCPServer {
+public class TCPServer implements Runnable{
+    String matrikelnr;
+    String berechneteMatrikelnr;
 
-    public static void main(String[] args) throws Exception {
-        long clientNumber = R.id.editNumber;
-        long doubledNumber;
+    public TCPServer(String matrikelnr){
+        this.matrikelnr = matrikelnr;
+    }
 
-        ServerSocket welcomeSocket = new ServerSocket(53212);
+    @Override
+    public void run() {
+        try{
+            Socket clientSocket = new Socket("se2-isys.aau.at",53212);
+            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        while(true){
-            Socket connectionSocket = welcomeSocket.accept();
+            outToServer.writeBytes(this.matrikelnr + '\n');
+            this.berechneteMatrikelnr = inFromServer.readLine();
+            clientSocket.close();
 
-            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-
-            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-
-            doubledNumber = clientNumber * 2 + '\n';
-            outToClient.writeLong(doubledNumber);
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
+    }
+
+    public String getBerechneteMatrikelnr(){
+        return this.berechneteMatrikelnr;
     }
 }
