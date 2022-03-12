@@ -14,4 +14,10 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void ConnectionTest(){
+        TCPServer server = new TCPServer("12034341");
+        System.out.println(server.getOutput());
+    }
 }

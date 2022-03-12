@@ -48,11 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             t.join();
-            this.tv_answer.setText(server.getBerechneteMatrikelnr());
+            this.tv_answer.setText(server.getOutput());
         }catch (Exception e){
             this.tv_answer.setText("Fehler bei ServerVerbindung");
             e.printStackTrace();
         }
+
+
     }
 
     private void CalculateBinary(){
