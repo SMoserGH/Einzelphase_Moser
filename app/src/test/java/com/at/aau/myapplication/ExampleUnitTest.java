@@ -18,6 +18,14 @@ public class ExampleUnitTest {
     @Test
     public void ConnectionTest(){
         TCPServer server = new TCPServer("12034341");
-        System.out.println(server.getOutput());
+        Thread t = new Thread(server);
+        t.start();
+        try {
+            t.join();
+            System.out.println(server.getOutput());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

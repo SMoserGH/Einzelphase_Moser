@@ -3,19 +3,19 @@ package com.at.aau.myapplication;
 public class BinaryTransformation implements Runnable{
 
     private int matrikelnr;
-    private String ergebnis;
+    private String result;
 
     public BinaryTransformation(int mnr){
         this.matrikelnr = mnr;
     }
 
     public String getErgebnis(){
-        return this.ergebnis;
+        return this.result;
     }
 
     @Override
     public void run() {
-        this.ergebnis = getBinaryNumberAsString(getQuersumme(matrikelnr));
+        this.result = getBinaryNumberAsString(getQuersumme(matrikelnr));
     }
 
     private int getQuersumme(int nummer){
